@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background-image: url('./1.jpg');
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+        .formui{
+          position: absolute;/*绝对定位*/
+          width: 300px;
+          height: 200px;
+
+          border: 1px solid antiquewhite;
+          text-align: center;/*(让div中的内容居中)*/
+          top: 50%;
+          left: 50%;
+          margin-top: -200px;
+          margin-left: -150px;
+            filter:alpha(opacity=50);
+            -moz-opacity:0.5;
+            -khtml-opacity: 0.5;
+            opacity: 0.5;
+        }
+    </style>
+    <script th:src="@{/js/jquery-1.10.2.js}"></script>
+    <script th:src="@{/layui/layui.all.js}"></script>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+</head>
+<body>
+<span th:text="${message}"></span>
+<div class="formui">
+    <h1>登录页面</h1>
+    <form class="layui-form" action="/login" method="post">
+        <i class="layui-icon layui-icon-username"></i>
+        <div class="layui-input-inline">
+            <input type="username" name="username" required lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+        </div>
+        <br>
+
+        <i class="layui-icon layui-icon-password"></i>
+        <div class="layui-input-inline">
+            <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+        </div>
+
+        <br>
+        <button type="submit" class="layui-btn layui-btn-radius">登录</button>
+
+    </form>
+</div>
+<br>
+
+
+</body>
+</html>
+
+
+
