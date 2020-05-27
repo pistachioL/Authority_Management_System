@@ -23,7 +23,7 @@
             <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除<i class="layui-icon layui-icon-subtraction"></i></a>
         </script>
 <!--点击添加按钮弹出的表单-->
-        <form class="layui-form" action="" id="userForm" style="display: none">
+        <form class="layui-form" action="" id="userSaveForm" style="display: none">
             <div class="layui-form-item">
                 <label class="layui-form-label">用户名</label>
                 <div class="layui-input-block">
@@ -43,7 +43,27 @@
                 </div>
             </div>
         </form>
-
+<!--修改用户的表单-->
+        <form class="layui-form" action="" id="updateUserForm" style="display: none">
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="username" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">密 码</label>
+                <div class="layui-input-inline">
+                    <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="saveUserForm">立即添加</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 </body>
@@ -51,12 +71,36 @@
 <script>
     var form = layui.form;
     form.render();
-    //监听提交
+    //监听提交 添加用户
     form.on('submit(saveUserForm)', function(data){
-        alert('aaa')
-        //数据提交到后端
+        //数据的提交，ajax方式
+        console.log(data.field)
+        $.ajax({
+            url: 'saveUser',//地址
+            dataType: 'json',//数据类型
+            type: 'POST',//类型
+            data:data.field,
+            //请求成功
+            success: function (result) {
+                if(result.code==0){
+                    //关闭弹出层
+                    layer.closeAll();
+                    //显示添加成功消息
+                    layer.msg(result.message,{icon:1})
+                    //重新加载数据表格
+                    myTable.reload();
+                }else
+                {
+                    //关闭弹出层
+                    layer.closeAll();
+                    layer.msg(result.message,{icon:5})
+                }
+            }
+        });
         return false;
     });
+
+
 
     layui.use('table', function(){
         var table = layui.table;
@@ -75,7 +119,6 @@
                 ,{field: 'userid', title: 'id', width:80, sort: true, fixed: 'left'}
                 ,{field: 'username', title: '用户名', width:120}
                 ,{field: 'password', title: '密码', width:200, sort: true}
-                ,{field: 'salt', title: '盐值', width:200}
                 ,{title: '操作', width:300, toolbar: '#barDemo'}
 
             ]]
@@ -91,27 +134,39 @@
                     layer.open({
                         type: 1,
                         title: '添加用户',
-                        content: $("#userForm"), //这里content是一个普通的String
+                        content: $("#userSaveForm"), //这里content是一个普通的String
                         closeBtn: '2',
                         shade: [0.8, '#393D49'],
                         area: ['400px', '250px']
                         }
                     )
                     break;
-                case 'update':
+                case 'edit':
                     if(data.length === 0){
                         layer.msg('请选择一行');
                     } else if(data.length > 1){
                         layer.msg('只能同时编辑一个');
                     } else {
                         layer.alert('编辑 [id]：'+ checkStatus.data[0].id);
+                        layer.open({
+                                type: 1,
+                                title: '修改用户',
+                                content: $("#updateUserForm"), //这里content是一个普通的String
+                                closeBtn: '2',
+                                shade: [0.8, '#393D49'],
+                                area: ['400px', '250px']
+                            }
+                        )
                     }
                     break;
-                case 'delete':
+                case 'delUser':
                     if(data.length === 0){
                         layer.msg('请选择一行');
                     } else {
                         layer.msg('删除');
+                        for(var i = 0; i < data.length; i++){
+
+                        }
                     }
                     break;
             };

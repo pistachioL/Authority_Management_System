@@ -57,6 +57,7 @@
             </if>
         </trim>
     </insert>
+
     <update id="updateByPrimaryKeySelective" parameterType="com.example.entity.MyUserInfo">
         update userinfo
         <set>

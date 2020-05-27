@@ -66,5 +66,14 @@ public class UserController {
         }
         return map;
     }
+
+//    //删除用户
+//    @RequestMapping("/delUser")
+//    @ResponseBody
+//    public Object delUser(MyUserInfo myUserInfo){
+//        int i = userBizimpl.
+//
+//
+//    }
 }
 
