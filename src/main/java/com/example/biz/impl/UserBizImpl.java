@@ -35,5 +35,15 @@ public class UserBizImpl implements UserBiz {
         return myUserInfoMapper.insertSelective(userInfo);
     }
 
+    @Override
+    public int deleUserByID(List<String> ids) {
+        return myUserInfoMapper.delUserByID(ids);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(MyUserInfo myUserInfo) {
+        return myUserInfoMapper.updateByPrimaryKeySelective(myUserInfo);
+    }
+
 
 }

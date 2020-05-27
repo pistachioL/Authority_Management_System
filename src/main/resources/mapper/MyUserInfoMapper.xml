@@ -22,10 +22,19 @@
     <select id="findUserByName" parameterType="string" resultType="com.example.entity.MyUserInfo">
         select * from userinfo where username=#{fff}
     </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from userinfo
     where userid = #{userid,jdbcType=INTEGER}
   </delete>
+    <delete id="delUserByID"  parameterType="java.util.List">
+        delete from userinfo
+        where userid in
+        <foreach collection="ids" item="xxx" open="(" close=")" separator=",">
+            #{xxx}
+        </foreach>
+    </delete>
+
     <insert id="insert" parameterType="com.example.entity.MyUserInfo">
     insert into userinfo (userid, username, password
       )

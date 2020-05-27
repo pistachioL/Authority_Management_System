@@ -9,5 +9,6 @@ public interface UserBiz {
     List<MyUserInfo> selectAllUser();
     MyUserInfo findUserByName(String name);
     int insertSelective(MyUserInfo record);
-   // int deleUserByID(@Param(ids));
+    int deleUserByID(List<String>ids);
+    int updateByPrimaryKeySelective(MyUserInfo myUserInfo);
 }
