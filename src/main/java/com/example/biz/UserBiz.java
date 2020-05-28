@@ -10,5 +10,6 @@ public interface UserBiz {
     MyUserInfo findUserByName(String name);
     int insertSelective(MyUserInfo record);
     int deleUserByID(List<String>ids);
+    //int deleteByPrimaryKey(Integer userid);
     int updateByPrimaryKeySelective(MyUserInfo myUserInfo);
 }

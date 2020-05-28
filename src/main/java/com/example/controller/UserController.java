@@ -84,7 +84,7 @@ public class UserController {
         return map;
     }
 
-    //删除用户
+    //删除多组或一组用户
     @RequestMapping("/delUser")
     @ResponseBody
     public Object delUser( @RequestParam(value = "ids") String  ids){  //ids请求参数要和前端对应　删除多个id
@@ -102,6 +102,9 @@ public class UserController {
         return map;
     }
 
-
+    @RequestMapping("/toUnau")
+    public String toUnau(){
+        return "shiro/unau";
+    }
 }
 

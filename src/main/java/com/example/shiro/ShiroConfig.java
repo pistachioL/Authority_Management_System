@@ -1,5 +1,6 @@
 package com.example.shiro;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.ShiroFilter;
@@ -52,8 +53,18 @@ public class ShiroConfig {
         Map<String,String> map = new LinkedHashMap<>();
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
         map.put("/login","anon");//放行登录页面
+        map.put("/toShiro","perms[/toShiro");
+
         map.put("/*","authc"); //对所有的请求进行认证
         shiroFilterFactoryBean.setLoginUrl("/toLogin");
+        //指定未授权页面
+        shiroFilterFactoryBean.setUnauthorizedUrl("/unau");
         return shiroFilterFactoryBean;
+    }
+
+    //shrio方言
+    @Bean
+    public ShiroDialect shrioDialect(){
+        return new ShiroDialect();
     }
 }

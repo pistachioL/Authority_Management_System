@@ -27,7 +27,7 @@ public class UserBizImpl implements UserBiz {
 
     @Override
     public int insertSelective(MyUserInfo userInfo) {
-        String salt = UUID.randomUUID().toString();
+        String salt = UUID.randomUUID().toString();  //加盐加密　随机的uuid
         String password = userInfo.getPassword();
         String encrytionPsd = ShiroUtil.encrytionBySalt(salt,password);
         userInfo.setPassword(encrytionPsd);
@@ -39,6 +39,11 @@ public class UserBizImpl implements UserBiz {
     public int deleUserByID(List<String> ids) {
         return myUserInfoMapper.delUserByID(ids);
     }
+
+//    @Override
+//    public int deleteByPrimaryKey(Integer userid) {
+//        return myUserInfoMapper.deleteByPrimaryKey(userid);
+//    }
 
     @Override
     public int updateByPrimaryKeySelective(MyUserInfo myUserInfo) {

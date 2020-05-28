@@ -53,6 +53,9 @@
             <if test="password != null">
                 password,
             </if>
+            <if test="salt != null">
+                salt,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userid != null">
@@ -63,6 +66,9 @@
             </if>
             <if test="password != null">
                 #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                #{salt,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>

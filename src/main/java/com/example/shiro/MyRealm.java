@@ -38,8 +38,8 @@ public class MyRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         System.out.println("授权开始");
         //获取用户信息
-        MyUserInfo user = (MyUserInfo) SecurityUtils.getSubject().getPrincipal();
-        //权限字符串从数据库中获取
+        MyUserInfo user = (MyUserInfo) SecurityUtils.getSubject().getPrincipal(); //认证的时候已经存了用户，现在取回
+        //权限字符串从数据库中获取 可访问的路径
         String perms = user.getPassword();
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         simpleAuthorizationInfo.addStringPermission(perms);

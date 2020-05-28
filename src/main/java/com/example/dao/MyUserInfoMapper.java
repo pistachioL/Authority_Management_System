@@ -13,7 +13,7 @@ public interface MyUserInfoMapper {
     int insert(MyUserInfo record);
     int insertSelective(MyUserInfo record);
 
-    int deleteByPrimaryKey(Integer userid);
+ //   int deleteByPrimaryKey(Integer userid);
     int delUserByID( @Param("ids") List<String> ids);
 
     MyUserInfo selectByPrimaryKey(Integer userid);
