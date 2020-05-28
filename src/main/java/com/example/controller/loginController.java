@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.entity.MyUserInfo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -24,6 +25,7 @@ public class loginController {
     public String login(String username, String password, Model model){
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username,password);
+
         try{
             subject.login(token);
         }catch (UnknownAccountException e){

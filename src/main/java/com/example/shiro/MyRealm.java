@@ -9,6 +9,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.UUID;
@@ -28,7 +29,8 @@ public class MyRealm extends AuthorizingRealm {
         if(userByName == null)
             return null;
         String sqlpassword = userByName.getPassword();
-        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(userByName,sqlpassword,getName());
+        ByteSource salt = ByteSource.Util.bytes(userByName.getSalt());
+        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(userByName,sqlpassword,salt,getName());
         return simpleAuthenticationInfo;
     }
 
